@@ -2,7 +2,11 @@
 # Conditional build:
 %bcond_without	asmopt	# without assmbler optimization for i586+
 #
-%ifnarch i586 i686 athlon
+# disable asmopt where not applicable
+%ifarch i386 i486
+%undefine	with_asmopt
+%endif
+%ifnarch %{ix86}
 %undefine	with_asmopt
 %endif
 %define		realname		zlib
