@@ -150,8 +150,10 @@ CFLAGS="-D_REENTRANT %{rpmcflags}%{?with_asmopt: -DASMV}" \
 %{__make}
 %{__make} z.dll
 
-%{target}-strip z.dll
+%if 0%{!?debug:1}
+%{target}-strip -R.comment -R.note z.dll
 %{target}-strip -g -R.comment -R.note *.a
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
