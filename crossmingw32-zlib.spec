@@ -145,6 +145,8 @@ install -d $RPM_BUILD_ROOT%{arch}{/lib,/include}
 
 install zutil.h $RPM_BUILD_ROOT%{arch}/include
 
+%{!?debug:%{target}-strip -g -R.comment -R.note $RPM_BUILD_ROOT%{arch}/lib/libz.a}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
