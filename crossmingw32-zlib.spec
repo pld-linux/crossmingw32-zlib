@@ -7,11 +7,11 @@
 %endif
 
 %define		realname		zlib
-Summary:	Library for compression and decompression
+Summary:	Library for compression and decompression - Ming32 cross version
 Summary(de):	Library für die Komprimierung und Dekomprimierung
 Summary(es):	Biblioteca para compresión y descompresión
 Summary(fr):	bibliothèque de compression et décompression
-Summary(pl):	Biblioteka z podprogramami do kompresji i dekompresji
+Summary(pl):	Biblioteka z podprogramami do kompresji i dekompresji - wersja skro¶na dla Ming32
 Summary(pt_BR):	Biblioteca para compressão e descompressão
 Summary(ru):	âÉÂÌÉÏÔÅËÁ ÄÌÑ ËÏÍĞÒÅÓÓÉÉ É ÄÅËÏÍĞÒÅÓÓÉÉ
 Summary(tr):	Sıkıştırma işlemleri için kitaplık
@@ -29,6 +29,7 @@ Patch2:		%{realname}-gzprintf_sec.patch
 URL:		http://www.zlib.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	crossmingw32-gcc
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{realname}-%{version}-root-%(id -u -n)
 
