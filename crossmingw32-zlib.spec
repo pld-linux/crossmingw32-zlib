@@ -23,6 +23,7 @@ Group:		Libraries
 Source0:	http://www.gzip.org/zlib/%{realname}-%{version}.tar.gz
 # Source0-md5:	ef1cb003448b4a53517b8f25adb12452
 Patch0:		%{realname}-asmopt.patch
+Patch1:		%{name}-shared.patch
 URL:		http://www.zlib.org/
 BuildRequires:	crossmingw32-gcc
 Requires:	crossmingw32-runtime
@@ -104,8 +105,20 @@ sistem yazЩlЩmЩ tarafЩndan kullanЩlmaktadЩr.
 не╖ можуть бути додан╕ ╕ ╕нш╕ методи ╕ вс╕ вони будуть використовувати
 той же самий потоковий ╕нтерфейс.
 
+%package dll
+Summary:	zlib - DLL library for Windows
+Summary(pl):	zlib - biblioteka DLL dla Windows
+Group:		Applications/Emulators
+
+%description dll
+zlib - DLL library for Windows.
+
+%description dll -l pl
+zlib - biblioteka DLL dla Windows.
+
 %prep
 %setup -q -n %{realname}-%{version}
+%patch1 -p1
 
 %if %{with asmopt}
 %patch0 -p1
@@ -135,17 +148,22 @@ CFLAGS="-D_REENTRANT %{rpmcflags}%{?with_asmopt: -DASMV}" \
 	--prefix=%{arch}
 
 %{__make}
+%{__make} z.dll
+
+%{target}-strip z.dll
+%{target}-strip -g -R.comment -R.note *.a
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{arch}{/lib,/include}
+install -d $RPM_BUILD_ROOT%{_datadir}/wine/windows/system
 
 %{__make} install \
 	prefix=$RPM_BUILD_ROOT%{arch}
 
 install zutil.h $RPM_BUILD_ROOT%{arch}/include
-
-%{!?debug:%{target}-strip -g -R.comment -R.note $RPM_BUILD_ROOT%{arch}/lib/libz.a}
+install libz.dll.a $RPM_BUILD_ROOT%{arch}/lib
+install z.dll $RPM_BUILD_ROOT%{_datadir}/wine/windows/system
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -153,4 +171,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %{arch}/include/*.h
-%{arch}/lib/libz.a
+%{arch}/lib/*
+
+%files dll
+%defattr(644,root,root,755)
+%{_datadir}/wine/windows/system/*
