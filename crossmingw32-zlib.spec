@@ -1,11 +1,10 @@
-
+#
+# Conditional build:
+%bcond_without	asmopt	# without assmbler optimization for i586+
+#
 %ifnarch i586 i686 athlon
-%define				_asmopt		0
-%else
-%{?_without_asmopt:%define	_asmopt		0}
-%{!?_without_asmopt:%define	_asmopt		1}
+%undefine	with_asmopt
 %endif
-
 %define		realname		zlib
 Summary:	Library for compression and decompression - Ming32 cross version
 Summary(de):	Library für die Komprimierung und Dekomprimierung
@@ -17,29 +16,21 @@ Summary(ru):	âÉÂÌÉÏÔÅËÁ ÄÌÑ ËÏÍÐÒÅÓÓÉÉ É ÄÅËÏÍÐÒÅÓÓÉÉ
 Summary(tr):	Sýkýþtýrma iþlemleri için kitaplýk
 Summary(uk):	â¦ÂÌ¦ÏÔÅËÁ ÄÌÑ ËÏÍÐÒÅÓ¦§ ÔÁ ÄÅËÏÍÐÒÅÓ¦§
 Name:		crossmingw32-%{realname}
-Version:	1.1.4
+Version:	1.2.1
 Release:	1
 License:	BSD
 Group:		Libraries
-Source0:	http://www.gzip.org/%{realname}/%{realname}-%{version}.tar.gz
-# Source0-md5: abc405d0bdd3ee22782d7aa20e440f08
-Patch0:		%{realname}-sharedlib.patch
-Patch1:		%{realname}-asmopt.patch
-Patch2:		%{realname}-gzprintf_sec.patch
+Source0:	http://www.gzip.org/zlib/%{realname}-%{version}.tar.gz
+# Source0-md5:	ef1cb003448b4a53517b8f25adb12452
+Patch0:		%{realname}-asmopt.patch
 URL:		http://www.zlib.org/
-BuildRequires:	autoconf
-BuildRequires:	automake
 BuildRequires:	crossmingw32-gcc
-BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{realname}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
 
 %define		target			i386-mingw32
-%define		target_platform 	i386-pc-mingw32
 %define		arch			%{_prefix}/%{target}
-%define		gccarch			%{_prefix}/lib/gcc-lib/%{target}
-%define		gcclib			%{_prefix}/lib/gcc-lib/%{target}/%{version}
 
 %define		__cc			%{target}-gcc
 %define		__cxx			%{target}-g++
@@ -114,11 +105,9 @@ sistem yazýlýmý tarafýndan kullanýlmaktadýr.
 
 %prep
 %setup -q -n %{realname}-%{version}
-%patch0 -p1
-%{?_with_asmopt:%patch1 -p1}
 
-%if %{_asmopt}
-%patch1 -p1
+%if %{with asmopt}
+%patch0 -p1
 %ifarch i686 athlon
 cp contrib/asm686/match.S .
 %endif
@@ -126,21 +115,22 @@ cp contrib/asm686/match.S .
 cp contrib/asm586/match.S .
 %endif
 %endif
-%patch2 -p1
+
+# fix for underline test
+#sed -e 's/nm/%{target}-nm/' configure > configure.tmp
+# but it's broken anyway (tries to use mmap test remains, but there is no mmap
+# in mingw32) - so hardcode that underline is needed
+sed -e 's/.*grep _hello.*/if false; then/' configure > configure.tmp
+mv -f configure.tmp configure
+chmod +x configure
 
 %build
-CC=%{target}-gcc ; export CC
-CXX=%{target}-g++ ; export CXX
-LD=%{target}-ld ; export LD
-AR="%{target}-ar rc" ; export AR
-AS=%{target}-as ; export AS
-CROSS_COMPILE=1 ; export CROSS_COMPILE
-CPPFLAGS="-I%{arch}/include" ; export CPPFLAGS
-RANLIB=%{target}-ranlib ; export RANLIB
-LDSHARED="%{target}-gcc -shared" ; export LDSHARED
-
+CC="%{__cc}" \
+CXX="%{__cxx}" \
+AR="%{target}-ar rc" \
+RANLIB="%{target}-ranlib" \
+CFLAGS="-D_REENTRANT %{rpmcflags}%{?with_asmopt: -DASMV}" \
 ./configure \
-	--shared \
 	--prefix=%{arch}
 
 %{__make}
@@ -149,12 +139,15 @@ LDSHARED="%{target}-gcc -shared" ; export LDSHARED
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{arch}{/lib,/include}
 
-install libz.a $RPM_BUILD_ROOT%{arch}/lib
+%{__make} install \
+	prefix=$RPM_BUILD_ROOT%{arch}
+
 install zutil.h $RPM_BUILD_ROOT%{arch}/include
-%{__make} prefix=$RPM_BUILD_ROOT%{arch} install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%{arch}
+%defattr(644,root,root,755)
+%{arch}/include/*.h
+%{arch}/lib/libz.a
