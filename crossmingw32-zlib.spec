@@ -18,7 +18,7 @@ Summary(tr):	SЩkЩЧtЩrma iЧlemleri iГin kitaplЩk
 Summary(uk):	Б╕бл╕отека для компрес╕╖ та декомпрес╕╖
 Name:		crossmingw32-%{realname}
 Version:	1.1.4
-Release:	7
+Release:	1
 License:	BSD
 Group:		Libraries
 Source0:	http://www.gzip.org/%{realname}/%{realname}-%{version}.tar.gz
