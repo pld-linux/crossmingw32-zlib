@@ -25,6 +25,7 @@ Source0:	http://www.gzip.org/zlib/%{realname}-%{version}.tar.gz
 Patch0:		%{realname}-asmopt.patch
 URL:		http://www.zlib.org/
 BuildRequires:	crossmingw32-gcc
+Requires:	crossmingw32-runtime
 BuildRoot:	%{tmpdir}/%{realname}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
