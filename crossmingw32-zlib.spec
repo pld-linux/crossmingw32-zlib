@@ -17,7 +17,7 @@ Summary(tr):	Sıkıştırma işlemleri için kitaplık
 Summary(uk):	â¦ÂÌ¦ÏÔÅËÁ ÄÌÑ ËÏÍĞÒÅÓ¦§ ÔÁ ÄÅËÏÍĞÒÅÓ¦§
 Name:		crossmingw32-%{realname}
 Version:	1.2.1
-Release:	1
+Release:	2
 License:	BSD
 Group:		Libraries
 Source0:	http://www.gzip.org/zlib/%{realname}-%{version}.tar.gz
@@ -36,6 +36,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		__cc			%{target}-gcc
 %define		__cxx			%{target}-g++
+
+%ifarch alpha sparc sparc64 sparcv9
+%define		optflags	-O2
+%endif
 
 %description
 The 'zlib' compression library provides in-memory compression and
