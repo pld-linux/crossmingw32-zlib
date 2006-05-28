@@ -20,16 +20,14 @@ Summary(ru):	Библиотека для компрессии и декомпрессии
 Summary(tr):	SЩkЩЧtЩrma iЧlemleri iГin kitaplЩk
 Summary(uk):	Б╕бл╕отека для компрес╕╖ та декомпрес╕╖
 Name:		crossmingw32-%{realname}
-Version:	1.2.1.1
-Release:	2
+Version:	1.2.3
+Release:	1
 License:	BSD
 Group:		Libraries
-#Source0:	http://www.gzip.org/zlib/%{realname}-%{version}.tar.gz
-Source0:	http://devel.santafelinux.com/source/%{realname}-%{version}/upstream/tarballs/%{realname}-%{version}.tar.gz
-# Source0-md5:	e30f85eed4ecb32841cafe12673c6590
+Source0:	http://www.zlib.net/%{realname}-%{version}.tar.gz
+# Source0-md5:	debc62758716a169df9f62e6ab2bc634
 Patch0:		%{realname}-asmopt.patch
-Patch1:		%{realname}-infsec.patch
-Patch2:		%{name}-shared.patch
+Patch1:		%{name}-shared.patch
 URL:		http://www.zlib.org/
 BuildRequires:	crossmingw32-gcc
 Requires:	crossmingw32-runtime
@@ -128,11 +126,10 @@ zlib - biblioteka DLL dla Windows.
 
 %prep
 %setup -q -n %{realname}-%{version}
-%patch2 -p1
+%patch1 -p1
 
 %if %{with asmopt}
 %patch0 -p1
-%patch1 -p1
 %ifarch i686 athlon
 cp contrib/asm686/match.S .
 %endif
