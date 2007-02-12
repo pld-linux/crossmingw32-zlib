@@ -11,14 +11,14 @@
 %endif
 %define		realname		zlib
 Summary:	Library for compression and decompression - Ming32 cross version
-Summary(de.UTF-8):   Library für die Komprimierung und Dekomprimierung
-Summary(es.UTF-8):   Biblioteca para compresión y descompresión
-Summary(fr.UTF-8):   bibliothèque de compression et décompression
-Summary(pl.UTF-8):   Biblioteka z podprogramami do kompresji i dekompresji - wersja skrośna dla Ming32
-Summary(pt_BR.UTF-8):   Biblioteca para compressão e descompressão
-Summary(ru.UTF-8):   Библиотека для компрессии и декомпрессии
-Summary(tr.UTF-8):   Sıkıştırma işlemleri için kitaplık
-Summary(uk.UTF-8):   Бібліотека для компресії та декомпресії
+Summary(de.UTF-8):	Library für die Komprimierung und Dekomprimierung
+Summary(es.UTF-8):	Biblioteca para compresión y descompresión
+Summary(fr.UTF-8):	bibliothèque de compression et décompression
+Summary(pl.UTF-8):	Biblioteka z podprogramami do kompresji i dekompresji - wersja skrośna dla Ming32
+Summary(pt_BR.UTF-8):	Biblioteca para compressão e descompressão
+Summary(ru.UTF-8):	Библиотека для компрессии и декомпрессии
+Summary(tr.UTF-8):	Sıkıştırma işlemleri için kitaplık
+Summary(uk.UTF-8):	Бібліотека для компресії та декомпресії
 Name:		crossmingw32-%{realname}
 Version:	1.2.3
 Release:	1
@@ -115,7 +115,7 @@ sistem yazılımı tarafından kullanılmaktadır.
 
 %package dll
 Summary:	zlib - DLL library for Windows
-Summary(pl.UTF-8):   zlib - biblioteka DLL dla Windows
+Summary(pl.UTF-8):	zlib - biblioteka DLL dla Windows
 Group:		Applications/Emulators
 
 %description dll
