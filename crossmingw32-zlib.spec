@@ -11,14 +11,14 @@
 %endif
 %define		realname		zlib
 Summary:	Library for compression and decompression - Ming32 cross version
-Summary(de):	Library für die Komprimierung und Dekomprimierung
-Summary(es):	Biblioteca para compresión y descompresión
-Summary(fr):	bibliothèque de compression et décompression
-Summary(pl):	Biblioteka z podprogramami do kompresji i dekompresji - wersja skro¶na dla Ming32
-Summary(pt_BR):	Biblioteca para compressão e descompressão
-Summary(ru):	âÉÂÌÉÏÔÅËÁ ÄÌÑ ËÏÍĞÒÅÓÓÉÉ É ÄÅËÏÍĞÒÅÓÓÉÉ
-Summary(tr):	Sıkıştırma işlemleri için kitaplık
-Summary(uk):	â¦ÂÌ¦ÏÔÅËÁ ÄÌÑ ËÏÍĞÒÅÓ¦§ ÔÁ ÄÅËÏÍĞÒÅÓ¦§
+Summary(de.UTF-8):   Library fÃ¼r die Komprimierung und Dekomprimierung
+Summary(es.UTF-8):   Biblioteca para compresiÃ³n y descompresiÃ³n
+Summary(fr.UTF-8):   bibliothÃ¨que de compression et dÃ©compression
+Summary(pl.UTF-8):   Biblioteka z podprogramami do kompresji i dekompresji - wersja skroÅ›na dla Ming32
+Summary(pt_BR.UTF-8):   Biblioteca para compressÃ£o e descompressÃ£o
+Summary(ru.UTF-8):   Ğ‘Ğ¸Ğ±Ğ»Ğ¸Ğ¾Ñ‚ĞµĞºĞ° Ğ´Ğ»Ñ ĞºĞ¾Ğ¼Ğ¿Ñ€ĞµÑÑĞ¸Ğ¸ Ğ¸ Ğ´ĞµĞºĞ¾Ğ¼Ğ¿Ñ€ĞµÑÑĞ¸Ğ¸
+Summary(tr.UTF-8):   SÄ±kÄ±ÅŸtÄ±rma iÅŸlemleri iÃ§in kitaplÄ±k
+Summary(uk.UTF-8):   Ğ‘Ñ–Ğ±Ğ»Ñ–Ğ¾Ñ‚ĞµĞºĞ° Ğ´Ğ»Ñ ĞºĞ¾Ğ¼Ğ¿Ñ€ĞµÑÑ–Ñ— Ñ‚Ğ° Ğ´ĞµĞºĞ¾Ğ¼Ğ¿Ñ€ĞµÑÑ–Ñ—
 Name:		crossmingw32-%{realname}
 Version:	1.2.3
 Release:	1
@@ -52,76 +52,76 @@ uncompressed data. This version of the library supports only one
 compression method (deflation) but other algorithms may be added later
 and will have the same stream interface.
 
-%description -l de
+%description -l de.UTF-8
 Die zlib-Komprimierungs-Library bietet speicherinterne Komprimierungs-
-und Dekomprimierungsfunktionen, einschließlich Integritätsprüfungen
-der unkomprimierten Daten. Diese Version der Library unterstützt nur
-eine Komprimierungsmethode (Deflation), doch können weitere
-Algorithmen nachträglich eingefügt werden und haben dann dieselbe
-Oberfläche.
+und Dekomprimierungsfunktionen, einschlieÃŸlich IntegritÃ¤tsprÃ¼fungen
+der unkomprimierten Daten. Diese Version der Library unterstÃ¼tzt nur
+eine Komprimierungsmethode (Deflation), doch kÃ¶nnen weitere
+Algorithmen nachtrÃ¤glich eingefÃ¼gt werden und haben dann dieselbe
+OberflÃ¤che.
 
-%description -l es
-La biblioteca de compresión 'zlib' nos ofrece funciones de compresión
-y descompresión en memoria, incluyendo chequeo de la integridad de
-datos no comprimidos. Esta versión de la biblioteca soporta solamente
-un método de compresión (deflación) pero otros algoritmos pueden ser
-añadidos más tarde y tendrán la misma interface. Esta biblioteca se
+%description -l es.UTF-8
+La biblioteca de compresiÃ³n 'zlib' nos ofrece funciones de compresiÃ³n
+y descompresiÃ³n en memoria, incluyendo chequeo de la integridad de
+datos no comprimidos. Esta versiÃ³n de la biblioteca soporta solamente
+un mÃ©todo de compresiÃ³n (deflaciÃ³n) pero otros algoritmos pueden ser
+aÃ±adidos mÃ¡s tarde y tendrÃ¡n la misma interface. Esta biblioteca se
 usa por varios programas de sistema.
 
-%description -l fr
-La bibliothèque de compression « zlib » offre des fonctions de
-compression et de décompression en mémoire, ainsi qu'une vérification
-de l'intégrité des données décompressées. La version de cette
-bibliothèque ne gère qu'une méthode de compression (deflation), mais
-d'autres algorithmes peuvent être ajoutés plus tard et auront la même
+%description -l fr.UTF-8
+La bibliothÃ¨que de compression Â« zlib Â» offre des fonctions de
+compression et de dÃ©compression en mÃ©moire, ainsi qu'une vÃ©rification
+de l'intÃ©gritÃ© des donnÃ©es dÃ©compressÃ©es. La version de cette
+bibliothÃ¨que ne gÃ¨re qu'une mÃ©thode de compression (deflation), mais
+d'autres algorithmes peuvent Ãªtre ajoutÃ©s plus tard et auront la mÃªme
 interface.
 
-%description -l pl
-Biblioteka zlib udostêpnia podprogramy do kompresji i dekompresji w
-pamiêci operacyjnej w³±cznie ze sprawdzaniem integralno¶ci w trakcie
-dekompresji. Ta wersja biblioteki udostêpnia tylko jedn± metodê
-kompresji o nazwie deflation niemniej inne algorytmy mog± byæ
-dodawane udostêpniaj±c taki sam interfejs funkcji operuj±cych na
+%description -l pl.UTF-8
+Biblioteka zlib udostÄ™pnia podprogramy do kompresji i dekompresji w
+pamiÄ™ci operacyjnej wÅ‚Ä…cznie ze sprawdzaniem integralnoÅ›ci w trakcie
+dekompresji. Ta wersja biblioteki udostÄ™pnia tylko jednÄ… metodÄ™
+kompresji o nazwie deflation niemniej inne algorytmy mogÄ… byÄ‡
+dodawane udostÄ™pniajÄ…c taki sam interfejs funkcji operujÄ…cych na
 strumieniu danych.
 
-%description -l pt_BR
-A biblioteca de compressão 'zlib' oferece funções de compressão e
-descompressão em memória, incluindo checagem da integridade de dados
-não comprimidos. Essa versão da biblioteca suporta somente um método
-de compressão (deflação) mas outros algoritmos podem ser adicionados
-mais tarde e terão a mesma interface. Essa biblioteca é usada por
-vários programas de sistema.
+%description -l pt_BR.UTF-8
+A biblioteca de compressÃ£o 'zlib' oferece funÃ§Ãµes de compressÃ£o e
+descompressÃ£o em memÃ³ria, incluindo checagem da integridade de dados
+nÃ£o comprimidos. Essa versÃ£o da biblioteca suporta somente um mÃ©todo
+de compressÃ£o (deflaÃ§Ã£o) mas outros algoritmos podem ser adicionados
+mais tarde e terÃ£o a mesma interface. Essa biblioteca Ã© usada por
+vÃ¡rios programas de sistema.
 
-%description -l ru
-âÉÂÌÉÏÔÅËÁ ËÏÍĞÒÅÓÓÉÉ zlib ÓÏÄÅÒÖÉÔ ÆÕÎËÃÉÉ ËÏÍĞÒÅÓÓÉÉ É ÄÅËÏÍĞÒÅÓÓÉÉ
-× ĞÁÍÑÔÉ, ×ËÌÀŞÁÀ ĞÒÏ×ÅÒËÕ ÃÅÌÏÓÔÎÏÓÔÉ ÄÅËÏÍĞÒÅÓÓÉÒÏ×ÁÎÎÙÈ ÄÁÎÎÙÈ. üÔÁ
-×ÅÒÓÉÑ ĞÏÄÄÅÒÖÉ×ÁÅÔ ÔÏÌØËÏ ÏÄÉÎ ÍÅÔÏÄ ËÏÍĞÒÅÓÓÉÉ (deflation), ÎÏ
-×ĞÏÓÌÅÄÓÔ×ÉÉ × ÎÅÅ ÍÏÇÕÔ ÂÙÔØ ÄÏÂÁ×ÌÅÎÙ É ÄÒÕÇÉÅ ÍÅÔÏÄÙ, É ×ÓÅ ÏÎÉ
-ÂÕÄÕÔ ÉÓĞÏÌØÚÏ×ÁÔØ ÔÏÔ ÖÅ ĞÏÔÏËÏ×ÙÊ ÉÎÔÅÒÆÅÊÓ.
+%description -l ru.UTF-8
+Ğ‘Ğ¸Ğ±Ğ»Ğ¸Ğ¾Ñ‚ĞµĞºĞ° ĞºĞ¾Ğ¼Ğ¿Ñ€ĞµÑÑĞ¸Ğ¸ zlib ÑĞ¾Ğ´ĞµÑ€Ğ¶Ğ¸Ñ‚ Ñ„ÑƒĞ½ĞºÑ†Ğ¸Ğ¸ ĞºĞ¾Ğ¼Ğ¿Ñ€ĞµÑÑĞ¸Ğ¸ Ğ¸ Ğ´ĞµĞºĞ¾Ğ¼Ğ¿Ñ€ĞµÑÑĞ¸Ğ¸
+Ğ² Ğ¿Ğ°Ğ¼ÑÑ‚Ğ¸, Ğ²ĞºĞ»ÑÑ‡Ğ°Ñ Ğ¿Ñ€Ğ¾Ğ²ĞµÑ€ĞºÑƒ Ñ†ĞµĞ»Ğ¾ÑÑ‚Ğ½Ğ¾ÑÑ‚Ğ¸ Ğ´ĞµĞºĞ¾Ğ¼Ğ¿Ñ€ĞµÑÑĞ¸Ñ€Ğ¾Ğ²Ğ°Ğ½Ğ½Ñ‹Ñ… Ğ´Ğ°Ğ½Ğ½Ñ‹Ñ…. Ğ­Ñ‚Ğ°
+Ğ²ĞµÑ€ÑĞ¸Ñ Ğ¿Ğ¾Ğ´Ğ´ĞµÑ€Ğ¶Ğ¸Ğ²Ğ°ĞµÑ‚ Ñ‚Ğ¾Ğ»ÑŒĞºĞ¾ Ğ¾Ğ´Ğ¸Ğ½ Ğ¼ĞµÑ‚Ğ¾Ğ´ ĞºĞ¾Ğ¼Ğ¿Ñ€ĞµÑÑĞ¸Ğ¸ (deflation), Ğ½Ğ¾
+Ğ²Ğ¿Ğ¾ÑĞ»ĞµĞ´ÑÑ‚Ğ²Ğ¸Ğ¸ Ğ² Ğ½ĞµĞµ Ğ¼Ğ¾Ğ³ÑƒÑ‚ Ğ±Ñ‹Ñ‚ÑŒ Ğ´Ğ¾Ğ±Ğ°Ğ²Ğ»ĞµĞ½Ñ‹ Ğ¸ Ğ´Ñ€ÑƒĞ³Ğ¸Ğµ Ğ¼ĞµÑ‚Ğ¾Ğ´Ñ‹, Ğ¸ Ğ²ÑĞµ Ğ¾Ğ½Ğ¸
+Ğ±ÑƒĞ´ÑƒÑ‚ Ğ¸ÑĞ¿Ğ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ñ‚ÑŒ Ñ‚Ğ¾Ñ‚ Ğ¶Ğµ Ğ¿Ğ¾Ñ‚Ğ¾ĞºĞ¾Ğ²Ñ‹Ğ¹ Ğ¸Ğ½Ñ‚ĞµÑ€Ñ„ĞµĞ¹Ñ.
 
-%description -l tr
-zlib sıkıştırma kitaplığı bellekte sıkıştırma ve açma fonksiyonları
-içermektedir. Bu sürüm yalnızca 'deflation' yöntemini
-desteklemektedir. Ancak başka algoritmaların aynı arabirimle
-erişilebilecek şekilde eklenme olasılığı vardır. Bu kitaplık bir dizi
-sistem yazılımı tarafından kullanılmaktadır.
+%description -l tr.UTF-8
+zlib sÄ±kÄ±ÅŸtÄ±rma kitaplÄ±ÄŸÄ± bellekte sÄ±kÄ±ÅŸtÄ±rma ve aÃ§ma fonksiyonlarÄ±
+iÃ§ermektedir. Bu sÃ¼rÃ¼m yalnÄ±zca 'deflation' yÃ¶ntemini
+desteklemektedir. Ancak baÅŸka algoritmalarÄ±n aynÄ± arabirimle
+eriÅŸilebilecek ÅŸekilde eklenme olasÄ±lÄ±ÄŸÄ± vardÄ±r. Bu kitaplÄ±k bir dizi
+sistem yazÄ±lÄ±mÄ± tarafÄ±ndan kullanÄ±lmaktadÄ±r.
 
-%description -l uk
-â¦ÂÌ¦ÏÔÅËÁ ËÏÍĞÒÅÓ¦§ zlib Í¦ÓÔÉÔØ ÆÕÎËÃ¦§ ËÏÍĞÒÅÓ¦§ ÔÁ ÄÅËÏÍĞÒÅÓ¦§ ×
-ĞÁÍ'ÑÔ¦ Ú ĞÅÒÅ×¦ÒËÏÀ Ã¦ÌÏÓÔ¦ ÄÅËÏÍĞÒÅÓÏ×ÁÎÉÈ ÄÁÎÉÈ. ãÑ ×ÅÒÓ¦Ñ
-Ğ¦ÄÔÒÉÍÕ¤ Ô¦ÌØËÉ ÏÄÉÎ ÍÅÔÏÄ ËÏÍĞÒÅÓ¦§ (deflation), ÁÌÅ × ÍÁÊÂÕÔÎØÏÍÕ ×
-ÎÅ§ ÍÏÖÕÔØ ÂÕÔÉ ÄÏÄÁÎ¦ ¦ ¦ÎÛ¦ ÍÅÔÏÄÉ ¦ ×Ó¦ ×ÏÎÉ ÂÕÄÕÔØ ×ÉËÏÒÉÓÔÏ×Õ×ÁÔÉ
-ÔÏÊ ÖÅ ÓÁÍÉÊ ĞÏÔÏËÏ×ÉÊ ¦ÎÔÅÒÆÅÊÓ.
+%description -l uk.UTF-8
+Ğ‘Ñ–Ğ±Ğ»Ñ–Ğ¾Ñ‚ĞµĞºĞ° ĞºĞ¾Ğ¼Ğ¿Ñ€ĞµÑÑ–Ñ— zlib Ğ¼Ñ–ÑÑ‚Ğ¸Ñ‚ÑŒ Ñ„ÑƒĞ½ĞºÑ†Ñ–Ñ— ĞºĞ¾Ğ¼Ğ¿Ñ€ĞµÑÑ–Ñ— Ñ‚Ğ° Ğ´ĞµĞºĞ¾Ğ¼Ğ¿Ñ€ĞµÑÑ–Ñ— Ğ²
+Ğ¿Ğ°Ğ¼'ÑÑ‚Ñ– Ğ· Ğ¿ĞµÑ€ĞµĞ²Ñ–Ñ€ĞºĞ¾Ñ Ñ†Ñ–Ğ»Ğ¾ÑÑ‚Ñ– Ğ´ĞµĞºĞ¾Ğ¼Ğ¿Ñ€ĞµÑĞ¾Ğ²Ğ°Ğ½Ğ¸Ñ… Ğ´Ğ°Ğ½Ğ¸Ñ…. Ğ¦Ñ Ğ²ĞµÑ€ÑÑ–Ñ
+Ğ¿Ñ–Ğ´Ñ‚Ñ€Ğ¸Ğ¼ÑƒÑ” Ñ‚Ñ–Ğ»ÑŒĞºĞ¸ Ğ¾Ğ´Ğ¸Ğ½ Ğ¼ĞµÑ‚Ğ¾Ğ´ ĞºĞ¾Ğ¼Ğ¿Ñ€ĞµÑÑ–Ñ— (deflation), Ğ°Ğ»Ğµ Ğ² Ğ¼Ğ°Ğ¹Ğ±ÑƒÑ‚Ğ½ÑŒĞ¾Ğ¼Ñƒ Ğ²
+Ğ½ĞµÑ— Ğ¼Ğ¾Ğ¶ÑƒÑ‚ÑŒ Ğ±ÑƒÑ‚Ğ¸ Ğ´Ğ¾Ğ´Ğ°Ğ½Ñ– Ñ– Ñ–Ğ½ÑˆÑ– Ğ¼ĞµÑ‚Ğ¾Ğ´Ğ¸ Ñ– Ğ²ÑÑ– Ğ²Ğ¾Ğ½Ğ¸ Ğ±ÑƒĞ´ÑƒÑ‚ÑŒ Ğ²Ğ¸ĞºĞ¾Ñ€Ğ¸ÑÑ‚Ğ¾Ğ²ÑƒĞ²Ğ°Ñ‚Ğ¸
+Ñ‚Ğ¾Ğ¹ Ğ¶Ğµ ÑĞ°Ğ¼Ğ¸Ğ¹ Ğ¿Ğ¾Ñ‚Ğ¾ĞºĞ¾Ğ²Ğ¸Ğ¹ Ñ–Ğ½Ñ‚ĞµÑ€Ñ„ĞµĞ¹Ñ.
 
 %package dll
 Summary:	zlib - DLL library for Windows
-Summary(pl):	zlib - biblioteka DLL dla Windows
+Summary(pl.UTF-8):   zlib - biblioteka DLL dla Windows
 Group:		Applications/Emulators
 
 %description dll
 zlib - DLL library for Windows.
 
-%description dll -l pl
+%description dll -l pl.UTF-8
 zlib - biblioteka DLL dla Windows.
 
 %prep
