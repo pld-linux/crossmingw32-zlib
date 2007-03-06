@@ -11,25 +11,19 @@
 %endif
 %define		realname		zlib
 Summary:	Library for compression and decompression - Ming32 cross version
-Summary(de.UTF-8):	Library für die Komprimierung und Dekomprimierung
-Summary(es.UTF-8):	Biblioteca para compresión y descompresión
-Summary(fr.UTF-8):	bibliothèque de compression et décompression
 Summary(pl.UTF-8):	Biblioteka z podprogramami do kompresji i dekompresji - wersja skrośna dla Ming32
-Summary(pt_BR.UTF-8):	Biblioteca para compressão e descompressão
-Summary(ru.UTF-8):	Библиотека для компрессии и декомпрессии
-Summary(tr.UTF-8):	Sıkıştırma işlemleri için kitaplık
-Summary(uk.UTF-8):	Бібліотека для компресії та декомпресії
 Name:		crossmingw32-%{realname}
 Version:	1.2.3
 Release:	1
 License:	BSD
-Group:		Libraries
+Group:		Development/Libraries
 Source0:	http://www.zlib.net/%{realname}-%{version}.tar.gz
 # Source0-md5:	debc62758716a169df9f62e6ab2bc634
 Patch0:		%{realname}-asmopt.patch
 Patch1:		%{name}-shared.patch
 URL:		http://www.zlib.org/
 BuildRequires:	crossmingw32-gcc
+BuildRequires:	sed >= 4.0
 Requires:	crossmingw32-runtime
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -43,8 +37,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysprefix		/usr
 %define		_prefix			%{_sysprefix}/%{target}
-%define		_aclocaldir		%{_datadir}/aclocal
-%define		_pkgconfigdir		%{_libdir}/pkgconfig
+%define		_dlldir			/usr/share/wine/windows/system
 %define		__cc			%{target}-gcc
 %define		__cxx			%{target}-g++
 
@@ -59,29 +52,7 @@ uncompressed data. This version of the library supports only one
 compression method (deflation) but other algorithms may be added later
 and will have the same stream interface.
 
-%description -l de.UTF-8
-Die zlib-Komprimierungs-Library bietet speicherinterne Komprimierungs-
-und Dekomprimierungsfunktionen, einschließlich Integritätsprüfungen
-der unkomprimierten Daten. Diese Version der Library unterstützt nur
-eine Komprimierungsmethode (Deflation), doch können weitere
-Algorithmen nachträglich eingefügt werden und haben dann dieselbe
-Oberfläche.
-
-%description -l es.UTF-8
-La biblioteca de compresión 'zlib' nos ofrece funciones de compresión
-y descompresión en memoria, incluyendo chequeo de la integridad de
-datos no comprimidos. Esta versión de la biblioteca soporta solamente
-un método de compresión (deflación) pero otros algoritmos pueden ser
-añadidos más tarde y tendrán la misma interface. Esta biblioteca se
-usa por varios programas de sistema.
-
-%description -l fr.UTF-8
-La bibliothèque de compression « zlib » offre des fonctions de
-compression et de décompression en mémoire, ainsi qu'une vérification
-de l'intégrité des données décompressées. La version de cette
-bibliothèque ne gère qu'une méthode de compression (deflation), mais
-d'autres algorithmes peuvent être ajoutés plus tard et auront la même
-interface.
+This package contains the cross version for Win32.
 
 %description -l pl.UTF-8
 Biblioteka zlib udostępnia podprogramy do kompresji i dekompresji w
@@ -91,39 +62,25 @@ kompresji o nazwie deflation niemniej inne algorytmy mogą być
 dodawane udostępniając taki sam interfejs funkcji operujących na
 strumieniu danych.
 
-%description -l pt_BR.UTF-8
-A biblioteca de compressão 'zlib' oferece funções de compressão e
-descompressão em memória, incluindo checagem da integridade de dados
-não comprimidos. Essa versão da biblioteca suporta somente um método
-de compressão (deflação) mas outros algoritmos podem ser adicionados
-mais tarde e terão a mesma interface. Essa biblioteca é usada por
-vários programas de sistema.
+Ten pakiet zawiera wersję skrośną dla Win32.
 
-%description -l ru.UTF-8
-Библиотека компрессии zlib содержит функции компрессии и декомпрессии
-в памяти, включаю проверку целостности декомпрессированных данных. Эта
-версия поддерживает только один метод компрессии (deflation), но
-впоследствии в нее могут быть добавлены и другие методы, и все они
-будут использовать тот же потоковый интерфейс.
+%package static
+Summary:	Static zlib library (cross mingw32 version)
+Summary(pl.UTF-8):	Statyczna biblioteka zlib (wersja skrośna mingw32)
+Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
 
-%description -l tr.UTF-8
-zlib sıkıştırma kitaplığı bellekte sıkıştırma ve açma fonksiyonları
-içermektedir. Bu sürüm yalnızca 'deflation' yöntemini
-desteklemektedir. Ancak başka algoritmaların aynı arabirimle
-erişilebilecek şekilde eklenme olasılığı vardır. Bu kitaplık bir dizi
-sistem yazılımı tarafından kullanılmaktadır.
+%description static
+Static zlib library (cross mingw32 version).
 
-%description -l uk.UTF-8
-Бібліотека компресії zlib містить функції компресії та декомпресії в
-пам'яті з перевіркою цілості декомпресованих даних. Ця версія
-підтримує тільки один метод компресії (deflation), але в майбутньому в
-неї можуть бути додані і інші методи і всі вони будуть використовувати
-той же самий потоковий інтерфейс.
+%description static -l pl.UTF-8
+Statyczna biblioteka zlib (wersja skrośna mingw32).
 
 %package dll
 Summary:	zlib - DLL library for Windows
 Summary(pl.UTF-8):	zlib - biblioteka DLL dla Windows
 Group:		Applications/Emulators
+Requires:	wine
 
 %description dll
 zlib - DLL library for Windows.
@@ -146,12 +103,11 @@ cp contrib/asm586/match.S .
 %endif
 
 # fix for underline test
-#sed -e 's/nm/%{target}-nm/' configure > configure.tmp
+#sed -i -e 's/nm/%{target}-nm/' configure
 # but it's broken anyway (tries to use mmap test remains, but there is no mmap
 # in mingw32) - so hardcode that underline is needed
-sed -e 's/.*grep _hello.*/if false; then/' configure > configure.tmp
-mv -f configure.tmp configure
-chmod +x configure
+sed -i -e 's/.*grep _hello.*/if false; then/' configure
+# vim '
 
 %build
 CC="%{__cc}" \
@@ -165,6 +121,7 @@ CFLAGS="-D_REENTRANT %{rpmcflags}%{?with_asmopt: -DASMV}" \
 %{__make}
 %{__make} z.dll
 
+# used by libtool to detect dependencies
 cat << "EOF" >> libz.la
 # libz.la - a libtool library file
 # Generated by ltmain.sh - GNU libtool 1.5.22 (1.1220.2.365 2005/12/18 22:14:06)
@@ -209,26 +166,31 @@ EOF
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_prefix}/{/lib,/include,/bin}
+install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir},%{_dlldir}}
 
 %{__make} install \
 	prefix=$RPM_BUILD_ROOT%{_prefix}
-    
 
 install zutil.h $RPM_BUILD_ROOT%{_includedir}
 install libz.dll.a $RPM_BUILD_ROOT%{_libdir}
-install z.dll $RPM_BUILD_ROOT%{_bindir}/libz.dll
 install libz.la $RPM_BUILD_ROOT%{_libdir}
+install z.dll $RPM_BUILD_ROOT%{_dlldir}/libz.dll
+
+rm -rf $RPM_BUILD_ROOT%{_datadir}/man
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-#%{arch}/include/*.h
+%{_libdir}/libz.dll.a
+%{_libdir}/libz.la
 %{_includedir}/*.h
-%{_libdir}/*
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/libz.a
 
 %files dll
 %defattr(644,root,root,755)
-%{_bindir}/*.dll
+%{_dlldir}/libz.dll
