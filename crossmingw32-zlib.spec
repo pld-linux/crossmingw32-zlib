@@ -14,7 +14,7 @@ Summary:	Library for compression and decompression - Ming32 cross version
 Summary(pl.UTF-8):	Biblioteka z podprogramami do kompresji i dekompresji - wersja skrośna dla Ming32
 Name:		crossmingw32-%{realname}
 Version:	1.2.3
-Release:	3
+Release:	4
 License:	BSD
 Group:		Development/Libraries
 Source0:	http://www.zlib.net/%{realname}-%{version}.tar.gz
@@ -31,12 +31,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		target			i386-mingw32
 %define		target_platform 	i386-pc-mingw32
-%define		arch			%{_prefix}/%{target}
-%define		gccarch			%{_prefix}/lib/gcc-lib/%{target}
-%define		gcclib			%{_prefix}/lib/gcc-lib/%{target}/%{version}
 
 %define		_sysprefix		/usr
 %define		_prefix			%{_sysprefix}/%{target}
+%define		_libdir			%{_prefix}/lib
 %define		_dlldir			/usr/share/wine/windows/system
 %define		__cc			%{target}-gcc
 %define		__cxx			%{target}-g++
