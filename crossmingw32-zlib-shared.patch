@@ -1,12 +1,11 @@
-diff -ruN zlib-1.2.1./Makefile.in zlib-1.2.1/Makefile.in
---- zlib-1.2.1./Makefile.in	2003-12-25 03:08:31.000000000 +0100
-+++ zlib-1.2.1/Makefile.in	2003-12-25 03:10:13.070092968 +0100
-@@ -71,6 +71,9 @@
- 	$(AR) $@ $(OBJS) $(OBJA)
+--- zlib-1.2.4./Makefile.in	2003-12-25 03:08:31.000000000 +0100
++++ zlib-1.2.4/Makefile.in	2003-12-25 03:10:13.070092968 +0100
+@@ -108,6 +108,9 @@
+ 	$(AR) $@ $(OBJS)
  	-@ ($(RANLIB) $@ || true) >/dev/null 2>&1
  
-+z.dll: $(OBJS) $(OBJA)
-+	$(CC) -shared $(OBJS) $(OBJA) -Wl,--enable-auto-image-base -o z.dll -Wl,--out-implib,libz.dll.a
++z.dll: $(OBJS)
++	$(CC) -shared $(OBJS) -Wl,--enable-auto-image-base -o z.dll -Wl,--out-implib,libz.dll.a
 +
  match.o: match.S
  	$(CPP) match.S > _match.s

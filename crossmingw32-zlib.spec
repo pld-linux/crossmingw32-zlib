@@ -13,14 +13,14 @@
 Summary:	Library for compression and decompression - Ming32 cross version
 Summary(pl.UTF-8):	Biblioteka z podprogramami do kompresji i dekompresji - wersja skrośna dla Ming32
 Name:		crossmingw32-%{realname}
-Version:	1.2.3
-Release:	4
+Version:	1.2.4
+Release:	1
 License:	BSD
 Group:		Development/Libraries
-Source0:	http://www.zlib.net/%{realname}-%{version}.tar.gz
-# Source0-md5:	debc62758716a169df9f62e6ab2bc634
-Patch0:		%{realname}-asmopt.patch
-Patch1:		%{name}-shared.patch
+Source0:	http://www.zlib.net/current/%{realname}-%{version}.tar.gz
+# Source0-md5:	47f6ed51b3c83a8534f9228531effa18
+#Patch0:		%{realname}-asmopt.patch
+Patch0:		%{name}-shared.patch
 URL:		http://www.zlib.org/
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	sed >= 4.0
@@ -35,6 +35,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_sysprefix		/usr
 %define		_prefix			%{_sysprefix}/%{target}
 %define		_libdir			%{_prefix}/lib
+%define		_pkgconfigdir		%{_prefix}/lib/pkgconfig
 %define		_dlldir			/usr/share/wine/windows/system
 %define		__cc			%{target}-gcc
 %define		__cxx			%{target}-g++
@@ -88,10 +89,9 @@ zlib - biblioteka DLL dla Windows.
 
 %prep
 %setup -q -n %{realname}-%{version}
-%patch1 -p1
+%patch0 -p1
 
 %if %{with asmopt}
-%patch0 -p1
 %ifarch i686 athlon
 cp contrib/asm686/match.S .
 %endif
@@ -110,14 +110,15 @@ sed -i -e 's/.*grep _hello.*/if false; then/' configure
 %build
 CC="%{__cc}" \
 CXX="%{__cxx}" \
-AR="%{target}-ar rc" \
+AR="%{target}-ar" \
 RANLIB="%{target}-ranlib" \
 CFLAGS="-D_REENTRANT %{rpmcflags}%{?with_asmopt: -DASMV}" \
 ./configure \
+	--static \
 	--prefix=%{_prefix}
 
-%{__make}
-%{__make} z.dll
+%{__make} static z.dll \
+	%{?with_asmopt:OBJA=match.o}
 
 # used by libtool to detect dependencies
 cat << "EOF" >> libz.la
@@ -183,7 +184,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libz.dll.a
 %{_libdir}/libz.la
-%{_includedir}/*.h
+%{_includedir}/zconf.h
+%{_includedir}/zlib.h
+%{_includedir}/zutil.h
+%{_pkgconfigdir}/zlib.pc
 
 %files static
 %defattr(644,root,root,755)
