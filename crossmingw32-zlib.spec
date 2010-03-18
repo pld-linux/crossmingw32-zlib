@@ -14,13 +14,11 @@ Summary:	Library for compression and decompression - Ming32 cross version
 Summary(pl.UTF-8):	Biblioteka z podprogramami do kompresji i dekompresji - wersja skrośna dla Ming32
 Name:		crossmingw32-%{realname}
 Version:	1.2.4
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Libraries
 Source0:	http://www.zlib.net/current/%{realname}-%{version}.tar.gz
 # Source0-md5:	47f6ed51b3c83a8534f9228531effa18
-#Patch0:		%{realname}-asmopt.patch
-Patch0:		%{name}-shared.patch
 URL:		http://www.zlib.org/
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	sed >= 4.0
@@ -89,7 +87,6 @@ zlib - biblioteka DLL dla Windows.
 
 %prep
 %setup -q -n %{realname}-%{version}
-%patch0 -p1
 
 %if %{with asmopt}
 %ifarch i686 athlon
@@ -100,24 +97,17 @@ cp contrib/asm586/match.S .
 %endif
 %endif
 
-# fix for underline test
-#sed -i -e 's/nm/%{target}-nm/' configure
-# but it's broken anyway (tries to use mmap test remains, but there is no mmap
-# in mingw32) - so hardcode that underline is needed
-sed -i -e 's/.*grep _hello.*/if false; then/' configure
-# vim '
-
 %build
-CC="%{__cc}" \
-CXX="%{__cxx}" \
-AR="%{target}-ar" \
-RANLIB="%{target}-ranlib" \
-CFLAGS="-D_REENTRANT %{rpmcflags}%{?with_asmopt: -DASMV}" \
-./configure \
-	--static \
-	--prefix=%{_prefix}
-
-%{__make} static z.dll \
+%{__make} -fwin32/Makefile.gcc all \
+	CC="%{__cc}" \
+	CXX="%{__cxx}" \
+	AR="%{target}-ar" \
+	RANLIB="%{target}-ranlib" \
+	CFLAGS="-D_REENTRANT %{rpmcflags}%{?with_asmopt: -DASMV}" \
+	DLLWRAP="%{target}-dllwrap" \
+	RC="%{target}-windres" \
+	prefix="%{_prefix}" \
+	CP="install" \
 	%{?with_asmopt:OBJA=match.o}
 
 # used by libtool to detect dependencies
@@ -128,10 +118,10 @@ cat << "EOF" >> libz.la
 # Made by czarny czarny at pld-linux.org
 
 # The name that we can dlopen(3).
-dlname='../bin/libz.dll'
+dlname='../bin/zlib1.dll'
 
 # Names of this library.
-library_names='libz.dll.a'
+library_names='libzdll.a'
 
 # The name of the static archive.
 old_library='libz.a'
@@ -158,22 +148,25 @@ dlpreopen=''
 libdir='%{_libdir}'
 EOF
 
+sed -e 's=@prefix@=%{_prefix}=;s=@exec_prefix@=%{_prefix}=;s=@libdir@=%{_libdir}=;s=@includedir@=%{_includedir}=;s=@VERSION@=%{version}=' \
+	< zlib.pc.in > zlib.pc
+
 %if 0%{!?debug:1}
-%{target}-strip -R.comment -R.note z.dll
+%{target}-strip -R.comment -R.note zlib1.dll
 %{target}-strip -g -R.comment -R.note *.a
 %endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir},%{_dlldir}}
+install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir},%{_dlldir},%{_pkgconfigdir}}
 
-%{__make} install \
-	prefix=$RPM_BUILD_ROOT%{_prefix}
-
-install zutil.h $RPM_BUILD_ROOT%{_includedir}
-install libz.dll.a $RPM_BUILD_ROOT%{_libdir}
+install zlib.h $RPM_BUILD_ROOT%{_includedir}
+install zconf.h $RPM_BUILD_ROOT%{_includedir}
+install libzdll.a $RPM_BUILD_ROOT%{_libdir}
+install libz.a $RPM_BUILD_ROOT%{_libdir}
 install libz.la $RPM_BUILD_ROOT%{_libdir}
-install z.dll $RPM_BUILD_ROOT%{_dlldir}/libz.dll
+install zlib1.dll $RPM_BUILD_ROOT%{_dlldir}
+install zlib.pc $RPM_BUILD_ROOT%{_pkgconfigdir}
 
 rm -rf $RPM_BUILD_ROOT%{_datadir}/man
 
@@ -182,11 +175,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%{_libdir}/libz.dll.a
+%{_libdir}/libzdll.a
 %{_libdir}/libz.la
 %{_includedir}/zconf.h
 %{_includedir}/zlib.h
-%{_includedir}/zutil.h
 %{_pkgconfigdir}/zlib.pc
 
 %files static
@@ -195,4 +187,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files dll
 %defattr(644,root,root,755)
-%{_dlldir}/libz.dll
+%{_dlldir}/zlib1.dll
