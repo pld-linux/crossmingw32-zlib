@@ -1,9 +1,9 @@
 #
 # Conditional build:
-%bcond_without	asmopt	# without assmbler optimization for i586+
+%bcond_without	asmopt	# without assmbler optimization for i686+
 #
 # disable asmopt where not applicable
-%ifarch i386 i486
+%ifarch i386 i486 i586
 %undefine	with_asmopt
 %endif
 %ifnarch %{ix86}
@@ -92,9 +92,6 @@ zlib - biblioteka DLL dla Windows.
 %ifarch i686 athlon
 cp contrib/asm686/match.S .
 %endif
-%ifarch i586
-cp contrib/asm586/match.S .
-%endif
 %endif
 
 %build
@@ -106,8 +103,9 @@ cp contrib/asm586/match.S .
 	CFLAGS="-D_REENTRANT %{rpmcflags}%{?with_asmopt: -DASMV}" \
 	DLLWRAP="%{target}-dllwrap" \
 	RC="%{target}-windres" \
-	prefix="%{_prefix}" \
 	CP="install" \
+	IMPLIB="libz.dll.a" \
+	prefix="%{_prefix}" \
 	%{?with_asmopt:OBJA=match.o}
 
 # used by libtool to detect dependencies
@@ -121,7 +119,7 @@ cat << "EOF" >> libz.la
 dlname='../bin/zlib1.dll'
 
 # Names of this library.
-library_names='libzdll.a'
+library_names='libz.dll.a'
 
 # The name of the static archive.
 old_library='libz.a'
@@ -162,7 +160,7 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir},%{_dlldir},%{_pkgconfigdir}
 
 install zlib.h $RPM_BUILD_ROOT%{_includedir}
 install zconf.h $RPM_BUILD_ROOT%{_includedir}
-install libzdll.a $RPM_BUILD_ROOT%{_libdir}
+install libz.dll.a $RPM_BUILD_ROOT%{_libdir}
 install libz.a $RPM_BUILD_ROOT%{_libdir}
 install libz.la $RPM_BUILD_ROOT%{_libdir}
 install zlib1.dll $RPM_BUILD_ROOT%{_dlldir}
@@ -175,7 +173,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%{_libdir}/libzdll.a
+%{_libdir}/libz.dll.a
 %{_libdir}/libz.la
 %{_includedir}/zconf.h
 %{_includedir}/zlib.h
