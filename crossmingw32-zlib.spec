@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	asmopt	# without assmbler optimization for i686+
+%bcond_without	asmopt	# without assembler optimization for i686+
 #
 # disable asmopt where not applicable
 %ifarch i386 i486 i586
@@ -13,14 +13,14 @@
 Summary:	Library for compression and decompression - Ming32 cross version
 Summary(pl.UTF-8):	Biblioteka z podprogramami do kompresji i dekompresji - wersja skrośna dla Ming32
 Name:		crossmingw32-%{realname}
-Version:	1.2.4
-Release:	3
+Version:	1.2.5
+Release:	1
 License:	BSD
 Group:		Development/Libraries
 Source0:	http://www.zlib.net/current/%{realname}-%{version}.tar.gz
-# Source0-md5:	47f6ed51b3c83a8534f9228531effa18
+# Source0-md5:	c735eab2d659a96e5a594c9e8541ad63
 Patch0:		%{name}-LFS.patch
-URL:		http://www.zlib.org/
+URL:		http://www.zlib.net/
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	sed >= 4.0
 Requires:	crossmingw32-runtime
