@@ -14,12 +14,13 @@ Summary:	Library for compression and decompression - Ming32 cross version
 Summary(pl.UTF-8):	Biblioteka z podprogramami do kompresji i dekompresji - wersja skrośna dla Ming32
 Name:		crossmingw32-%{realname}
 Version:	1.2.5
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Libraries
 Source0:	http://www.zlib.net/current/%{realname}-%{version}.tar.gz
 # Source0-md5:	c735eab2d659a96e5a594c9e8541ad63
 Patch0:		%{name}-LFS.patch
+Patch1:		%{realname}-lfs.patch
 URL:		http://www.zlib.net/
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	sed >= 4.0
@@ -89,6 +90,7 @@ zlib - biblioteka DLL dla Windows.
 %prep
 %setup -q -n %{realname}-%{version}
 %patch0 -p1
+%patch1 -p1
 
 %if %{with asmopt}
 %ifarch i686 athlon
