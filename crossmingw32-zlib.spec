@@ -10,8 +10,8 @@
 %undefine	with_asmopt
 %endif
 %define		realname		zlib
-Summary:	Library for compression and decompression - Ming32 cross version
-Summary(pl.UTF-8):	Biblioteka z podprogramami do kompresji i dekompresji - wersja skrośna dla Ming32
+Summary:	Library for compression and decompression - MinGW32 cross version
+Summary(pl.UTF-8):	Biblioteka z podprogramami do kompresji i dekompresji - wersja skrośna dla MinGW32
 Name:		crossmingw32-%{realname}
 Version:	1.2.5
 Release:	2
@@ -64,16 +64,16 @@ strumieniu danych.
 Ten pakiet zawiera wersję skrośną dla Win32.
 
 %package static
-Summary:	Static zlib library (cross mingw32 version)
-Summary(pl.UTF-8):	Statyczna biblioteka zlib (wersja skrośna mingw32)
+Summary:	Static zlib library (cross MinGW32 version)
+Summary(pl.UTF-8):	Statyczna biblioteka zlib (wersja skrośna MinGW32)
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description static
-Static zlib library (cross mingw32 version).
+Static zlib library (cross MinGW32 version).
 
 %description static -l pl.UTF-8
-Statyczna biblioteka zlib (wersja skrośna mingw32).
+Statyczna biblioteka zlib (wersja skrośna MinGW32).
 
 %package dll
 Summary:	zlib - DLL library for Windows
