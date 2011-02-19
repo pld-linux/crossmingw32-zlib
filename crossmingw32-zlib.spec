@@ -39,6 +39,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_dlldir			/usr/share/wine/windows/system
 %define		__cc			%{target}-gcc
 %define		__cxx			%{target}-g++
+%define		filterout_ld	        -Wl,-z,.*
+%define		filterout_c	        -gdwarf-3
 
 %ifarch alpha sparc sparc64 sparcv9
 %define		optflags	-O2
@@ -120,7 +122,7 @@ cat << "EOF" >> libz.la
 # Made by czarny czarny at pld-linux.org
 
 # The name that we can dlopen(3).
-dlname='../bin/zlib1.dll'
+dlname='%{_dlldir}/zlib1.dll'
 
 # Names of this library.
 library_names='libz.dll.a'
