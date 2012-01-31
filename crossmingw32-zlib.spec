@@ -13,14 +13,12 @@
 Summary:	Library for compression and decompression - MinGW32 cross version
 Summary(pl.UTF-8):	Biblioteka z podprogramami do kompresji i dekompresji - wersja skrośna dla MinGW32
 Name:		crossmingw32-%{realname}
-Version:	1.2.5
-Release:	4
+Version:	1.2.6
+Release:	1
 License:	BSD
 Group:		Development/Libraries
 Source0:	http://www.zlib.net/current/%{realname}-%{version}.tar.gz
-# Source0-md5:	c735eab2d659a96e5a594c9e8541ad63
-Patch0:		%{name}-LFS.patch
-Patch1:		%{realname}-lfs.patch
+# Source0-md5:	618e944d7c7cd6521551e30b32322f4a
 URL:		http://www.zlib.net/
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	sed >= 4.0
@@ -89,8 +87,6 @@ zlib - biblioteka DLL dla Windows.
 
 %prep
 %setup -q -n %{realname}-%{version}
-%patch0 -p1
-%patch1 -p1
 
 %if %{with asmopt}
 %ifarch i686 athlon
@@ -169,8 +165,6 @@ install libz.a $RPM_BUILD_ROOT%{_libdir}
 install libz.la $RPM_BUILD_ROOT%{_libdir}
 install zlib1.dll $RPM_BUILD_ROOT%{_dlldir}
 install zlib.pc $RPM_BUILD_ROOT%{_pkgconfigdir}
-
-rm -rf $RPM_BUILD_ROOT%{_datadir}/man
 
 %clean
 rm -rf $RPM_BUILD_ROOT
