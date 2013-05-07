@@ -13,12 +13,12 @@
 Summary:	Library for compression and decompression - MinGW32 cross version
 Summary(pl.UTF-8):	Biblioteka z podprogramami do kompresji i dekompresji - wersja skrośna dla MinGW32
 Name:		crossmingw32-%{realname}
-Version:	1.2.7
-Release:	3
+Version:	1.2.8
+Release:	1
 License:	BSD
 Group:		Development/Libraries
 Source0:	http://www.zlib.net/current/%{realname}-%{version}.tar.gz
-# Source0-md5:	60df6a37c56e7c1366cca812414f7b85
+# Source0-md5:	44d667c142d7cda120332623eab69f40
 URL:		http://www.zlib.net/
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	sed >= 4.0
