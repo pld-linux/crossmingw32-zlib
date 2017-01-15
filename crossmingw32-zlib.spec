@@ -1,6 +1,7 @@
 #
 # Conditional build:
-%bcond_without	asmopt	# without assembler optimization for i686+
+%bcond_with	asmopt	# without assembler optimization for i686+
+			# (asm is unsupported by upstream and unmaintained)
 #
 # disable asmopt where not applicable
 %ifarch i386 i486 i586
@@ -13,12 +14,12 @@
 Summary:	Library for compression and decompression - MinGW32 cross version
 Summary(pl.UTF-8):	Biblioteka z podprogramami do kompresji i dekompresji - wersja skrośna dla MinGW32
 Name:		crossmingw32-%{realname}
-Version:	1.2.8
-Release:	2
+Version:	1.2.10
+Release:	1
 License:	BSD
 Group:		Development/Libraries
 Source0:	http://www.zlib.net/current/%{realname}-%{version}.tar.gz
-# Source0-md5:	44d667c142d7cda120332623eab69f40
+# Source0-md5:	d9794246f853d15ce0fcbf79b9a3cf13
 URL:		http://www.zlib.net/
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	sed >= 4.0
