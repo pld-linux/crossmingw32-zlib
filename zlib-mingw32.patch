@@ -1,0 +1,26 @@
+--- zlib-1.3.2/gzread.c.orig	2026-02-17 13:47:06.000000000 +0100
++++ zlib-1.3.2/gzread.c	2026-02-18 21:11:30.272793843 +0100
+@@ -4,6 +4,10 @@
+  */
+ 
+ #include "gzguts.h"
++#ifdef __MINGW32__
++#include <winerror.h>
++#define EWOULDBLOCK WSAEWOULDBLOCK
++#endif
+ 
+ /* Use read() to load a buffer -- return -1 on error, otherwise 0.  Read from
+    state->fd, and update state->eof, state->err, and state->msg as appropriate.
+--- zlib-1.3.2/gzwrite.c.orig	2026-02-17 13:47:06.000000000 +0100
++++ zlib-1.3.2/gzwrite.c	2026-02-18 21:20:58.859713544 +0100
+@@ -4,6 +4,10 @@
+  */
+ 
+ #include "gzguts.h"
++#ifdef __MINGW32__
++#include <winerror.h>
++#define EWOULDBLOCK WSAEWOULDBLOCK
++#endif
+ 
+ /* Initialize state for writing a gzip file.  Mark initialization by setting
+    state->size to non-zero.  Return -1 on a memory allocation failure, or 0 on
